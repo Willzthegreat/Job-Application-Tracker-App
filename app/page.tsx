@@ -24,8 +24,8 @@ export default function Home() {
               Capture, Organize, and manage your job search in one place.
             </p>
             <div className="flex flex-col items-center gap-4">
-              <Link href="/pages/sign-up" className="cursor-pointer">
-                <Button size="lg" className="h-12 px-8 text-lg font-medium" >Start for Free <ArrowRight className="ml-2"/> </Button>
+              <Link href="/pages/sign-up">
+                <Button size="lg" className="h-12 px-8 hover:cursor-pointer text-lg font-medium" >Start for Free <ArrowRight className="ml-2"/> </Button>
               </Link>
               <p className="text-sm text-muted-foreground">Free forever. No credit required.</p>
             </div>

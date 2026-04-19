@@ -1,3 +1,5 @@
+"use client";
+
 import { Briefcase } from "lucide-react"
 import Link from "next/link"
 import { Button } from "./ui/button"
@@ -9,17 +11,17 @@ const Navbar = () => {
       <nav className="border-b border-gray-200 bg-white">
         <div className="container mx-auto flex h-16 items-center px-4 justify-between">
           <Link href="/" className="flex items-center gab-2 text-xl font-semibold text-primary">
-            <Briefcase /> 
+            <Briefcase />
             Job Tracker
           </Link>
           <div className="flex items-center gap-4">
             <Link href="/pages/sign-in" className="cursor-pointer">
-              <Button variant='ghost' className="text-gray-700 hover:text-black">
+              <Button variant='ghost' className="text-gray-700 hover:cursor-pointer hover:text-black">
                 Log In
-              </Button> 
+              </Button>
             </Link>
-            <Link href="/pages/sign-up" className="cursor-pointer"> 
-              <Button  className="bg-primary hover:bg-primary/90">
+            <Link href="/pages/sign-up" className="cursor-pointer">
+              <Button  className="bg-primary hover:cursor-pointer hover:bg-primary/90">
                 Start for free
               </Button>
             </Link>
