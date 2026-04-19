@@ -1,5 +1,4 @@
 "use client";
-// import './globals.css';
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,48 +9,38 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-
-
-
 const SignIn = () => {
-  
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-  
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
-  
-    const router = useRouter();
-  
-  
-  
-  
-    async function handleSubmit(e: React.FormEvent) {
-      e.preventDefault();
-                
-      setError("");
-      setLoading(true);
-  
-      try {
-        const result = await signIn.email({
-          email,
-          password,
-        });
-  
-        if (result.error) {
-          setError(result.error.message ?? "Failed to sign In." );
-        } else {
-          router.push("/pages/dashboard") 
-        }
-      } catch (err) {
-        setError("An Unexpected error occurred")
-      } finally {
-        setLoading(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+
+    setError("");
+    setLoading(true);
+
+    try {
+      const result = await signIn.email({
+        email,
+        password,
+      });
+
+      if (result.error) {
+        setError(result.error.message ?? "Failed to sign in.");
+      } else {
+        router.push("/pages/dashboard");
       }
+    } catch {
+      setError("An unexpected error occurred.");
+    } finally {
+      setLoading(false);
     }
-
-
-
+  }
 
   return (
     <>
@@ -102,7 +91,7 @@ const SignIn = () => {
                 className="w-full bg-primary hover:cursor-pointer hover:bg-primary/90">
                   {loading ? "Signing in ..." : "Sign In"}
                 </Button>
-              <p className="text-center text-sm text-gray-600">Don't have an Account?{" "} <Link href="/pages/sign-up" className="font-medium text-primary hover:underline">Sign Up</Link></p>
+              <p className="text-center text-sm text-gray-600">Don&apos;t have an Account?{" "} <Link href="/pages/sign-up" className="font-medium text-primary hover:underline">Sign Up</Link></p>
              </CardFooter>
           </form>
         </Card>

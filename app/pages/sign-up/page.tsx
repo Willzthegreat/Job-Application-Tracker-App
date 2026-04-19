@@ -1,55 +1,43 @@
 "use client";
-// import './globals.css';
-
-// import { signUp } from "@/lib/auth/auth";
 import { signUp } from "@/lib/auth/auth-client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
-
-
+import { useState } from "react";
 
 const SignUp = () => {
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
   const router = useRouter();
-
-
-
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-              
+
     setError("");
     setLoading(true);
 
     try {
-      // const result = await signUp.email({
-      //   name,
-      //   email,
-      //   password,
-      // });
+      const result = await signUp.email({
+        name: name.trim(),
+        email: email.trim(),
+        password,
+      });
 
-      // if (result.error) {
-      //   setError(result.error.message ?? "Failed to sign up." );
-      // } else {
-      //   router.push("/pages/dashboard") 
-      // }
+      if (result.error) {
+        setError(result.error.message ?? "Failed to sign up.");
+        return;
+      }
 
-      console.log(name);
-      console.log(name);
-    } catch (err) {
-      setError("An Unexpected error occurred")
+      router.push("/pages/dashboard");
+    } catch {
+      setError("An unexpected error occurred.");
     } finally {
       setLoading(false);
     }
