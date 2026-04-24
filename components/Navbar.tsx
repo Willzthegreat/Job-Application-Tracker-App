@@ -1,17 +1,17 @@
 import { Briefcase } from "lucide-react"
 import Link from "next/link"
 import { Button } from "./ui/button"
-import { getSession, ensureMongoConnection } from "@/lib/auth/auth";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
-import { Avatar, AvatarFallback } from "./ui/avatar";
-import { signOut } from "@/lib/auth/auth";
+// import { getSession, ensureMongoConnection } from "@/lib/auth/auth";
+// import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
+// import { Avatar, AvatarFallback } from "./ui/avatar";
+// import { signOut } from "@/lib/auth/auth";
 
 
 
 
 export default async function Navbar () {
-  await ensureMongoConnection();
-  const session = await getSession();
+  // await ensureMongoConnection();
+  // const session = await getSession();
 
 
 
@@ -24,7 +24,7 @@ export default async function Navbar () {
             Job Tracker
           </Link>
           <div className="flex items-center gap-4">
-            {session?.user ? (
+            {/* {session?.user ? (
               <>
                 <Link href="/pages/dashboard">
                   <Button
@@ -65,7 +65,19 @@ export default async function Navbar () {
                   Start for free
                 </Button>
               </Link>
-            </>)}
+            </>)} */}
+            
+              <Link href="/pages/sign-in">
+                <Button variant='ghost' className="text-gray-700 hover:cursor-pointer hover:text-black">
+                  Log In
+                </Button>
+              </Link>
+              <Link href="/pages/sign-up">
+                <Button  className="bg-primary hover:cursor-pointer hover:bg-primary/90">
+                  Start for free
+                </Button>
+              </Link>
+            
           </div>
         </div>
       </nav>

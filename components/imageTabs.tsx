@@ -19,24 +19,24 @@ export default function ImageTabs() {
                 <Button onClick={() => setActiveTab("boards")} className={`rounded-lg hover:cursor-pointer px-6 py-3 text-[0.5rem] md:text-[0.7rem] lg:text-[1rem] w-24 md:w-30 lg:w-40 font-medium transition-colors ${activeTab === "boards" ? "bg-primary text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}>Manage Boards</Button>
               </div>
               <div className="relative mx-auto max-w-5xl overflow-hidden rounded-lg border-gray-200 shadow-xl">
-                {activeTab ==="organize" && ( <Image 
-                  src="/hero-images/hero1.png"  
-                  alt="Organize Applications" 
-                  width={1200} 
+                {activeTab ==="organize" && ( <Image
+                  src="/hero-images/hero1.png"
+                  alt="Organize Applications"
+                  width={1200}
                   height={800}
                 />
                 )}
-                {activeTab ==="hired" && ( <Image 
-                  src="/hero-images/hero2.png"  
-                  alt="Get Hired" 
-                  width={1200} 
+                {activeTab ==="hired" && ( <Image
+                  src="/hero-images/hero2.png"
+                  alt="Get Hired"
+                  width={1200}
                   height={800}
                 />
                 )}
-                {activeTab ==="boards" && ( <Image 
-                  src="/hero-images/hero3.png"  
-                  alt="Manage Boards" 
-                  width={1200} 
+                {activeTab ==="boards" && ( <Image
+                  src="/hero-images/hero3.png"
+                  alt="Manage Boards"
+                  width={1200}
                   height={800}
                 />
                 )}

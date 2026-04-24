@@ -17,6 +17,8 @@ const cached: MongooseCache = global.mongoose || {conn: null, promise: null};
 if (!global.mongoose) {
     global.mongoose = cached;
 }
+
+
 async function connectDB() {
     // check this
     if (!MONGODB_URI) {
@@ -52,7 +54,4 @@ async function connectDB() {
 
 
 export default connectDB;
-
-
-
 

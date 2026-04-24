@@ -24,19 +24,25 @@ const SignUp = () => {
     setLoading(true);
 
     try {
+  //     const result = await signUp.email({
+  //       name: name.trim(),
+  //       email: email.trim(),
+  //       password,
+  //     });
       const result = await signUp.email({
-        name: name.trim(),
-        email: email.trim(),
+        name,
+        email,
         password,
       });
 
       if (result.error) {
         setError(result.error.message ?? "Failed to sign up.");
         return;
+      } else {
+        router.push("/pages/dashboard");
       }
 
-      router.push("/pages/dashboard");
-    } catch {
+    } catch (err) {
       setError("An unexpected error occurred.");
     } finally {
       setLoading(false);
@@ -55,29 +61,31 @@ const SignUp = () => {
               Create an Account to Start Tracking your Job Applications.
             </CardDescription>
           </CardHeader>
-          <form  className="space-y-4" onSubmit={handleSubmit}>
+          <form  className="space-y-4"
+          onSubmit={handleSubmit}
+          >
              <CardContent className="space-y-4">
-              {error && 
+              {error && (
                 <div className="rounded-md bg-destructive/15 p-3 text-sm text text-destructive">
                   {error}
                 </div>
-              }
+              )}
               <div className="space-y-2">
                 <Label htmlFor="name" className="text-gray-700">
                   Name
                 </Label>
-                <Input id="name" type="text" 
+                <Input id="name" type="text"
                 value={name}
-                onChange={(e) => setName(e.target.value)} 
+                onChange={(e) => setName(e.target.value)}
                 className="border-gray-300 focus:border-primary focus:ring-primary" placeholder="John Doe" required/>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email" className="text-gray-700">
-                  Email 
+                  Email
                 </Label>
                 <Input id="email" type="email"
                  value={email}
-                  onChange={(e) => setEmail(e.target.value)} 
+                  onChange={(e) => setEmail(e.target.value)}
                  className="border-gray-300 focus:border-primary focus:ring-primary " placeholder="you@example.com" required/>
               </div>
               <div className="space-y-2">
@@ -86,22 +94,23 @@ const SignUp = () => {
                 </Label>
                 <Input 
                   id="password"
-                  type="password" 
+                  type="password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)} 
+                  onChange={(e) => setPassword(e.target.value)}
                   minLength={8}
-                  className="border-gray-300 focus:border-primary focus:ring-primary" 
-                  placeholder="Enter your password here" 
+                  className="border-gray-300 focus:border-primary focus:ring-primary"
+                  placeholder="Enter your password here"
                   required
                   />
               </div>
              </CardContent>
              <CardFooter className="flex flex-col space-y-4">
-              <Button type="submit" 
+              <Button type="submit"
                 className="w-full bg-primary hover:cursor-pointer hover:bg-primary/90"
                 disabled={loading}
               >
                 {loading ? "Creating account ..." : "Sign Up"}
+                {/* Sign Up */}
               </Button>
               <p className="text-center  text-sm text-gray-600">Already have an Account?{" "} <Link href="/pages/sign-in" className="font-medium text-primary hover:underline">Sign In</Link></p>
              </CardFooter>
@@ -113,3 +122,6 @@ const SignUp = () => {
 }
 
 export default SignUp
+
+
+ 

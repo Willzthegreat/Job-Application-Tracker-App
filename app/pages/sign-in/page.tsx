@@ -6,41 +6,41 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { signIn } from "@/lib/auth/auth-client";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+// import { useRouter } from "next/navigation";
+// import { useState } from "react";
 
 const SignIn = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
 
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState("");
+  // const [loading, setLoading] = useState(false);
 
-  const router = useRouter();
+  // const router = useRouter();
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
+  // async function handleSubmit(e: React.FormEvent) {
+  //   e.preventDefault();
 
-    setError("");
-    setLoading(true);
+  //   setError("");
+  //   setLoading(true);
 
-    try {
-      const result = await signIn.email({
-        email,
-        password,
-      });
+  //   try {
+  //     const result = await signIn.email({
+  //       email,
+  //       password,
+  //     });
 
-      if (result.error) {
-        setError(result.error.message ?? "Failed to sign in.");
-      } else {
-        router.push("/pages/dashboard");
-      }
-    } catch {
-      setError("An unexpected error occurred.");
-    } finally {
-      setLoading(false);
-    }
-  }
+  //     if (result.error) {
+  //       setError(result.error.message ?? "Failed to sign in.");
+  //     } else {
+  //       router.push("/pages/dashboard");
+  //     }
+  //   } catch {
+  //     setError("An unexpected error occurred.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }
 
   return (
     <>
@@ -54,13 +54,15 @@ const SignIn = () => {
               Enter your Credentials to access your account.
             </CardDescription>
           </CardHeader>
-          <form  className="space-y-4" onSubmit={handleSubmit}>
+          <form  className="space-y-4" 
+          // onSubmit={handleSubmit}
+          >
              <CardContent className="space-y-4">
-              {error && 
+              {/* {error && 
                 <div className="rounded-md bg-destructive/15 p-3 text-sm text text-destructive">
                   {error}
                 </div>
-              }
+              } */}
               <div className="space-y-2">
                 <Label htmlFor="email" className="text-gray-700">
                   Email 
@@ -68,8 +70,8 @@ const SignIn = () => {
                 <Input 
                   id="email" 
                   type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)} 
+                  // value={email}
+                  // onChange={(e) => setEmail(e.target.value)} 
                   className="border-gray-300 focus:border-primary outline-primary" placeholder="you@example.com" required/>
               </div>
               <div className="space-y-2">
@@ -80,16 +82,17 @@ const SignIn = () => {
                   id="password"
                   type="password" 
                   minLength={8}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)} 
+                  // value={password}
+                  // onChange={(e) => setPassword(e.target.value)} 
                   className="border-gray-300 focus:border-primary" placeholder="Enter your password here" required/>
               </div>
              </CardContent>
              <CardFooter className="flex flex-col space-y-4">
               <Button type="submit" 
-                disabled={loading}
+                // disabled={loading}
                 className="w-full bg-primary hover:cursor-pointer hover:bg-primary/90">
-                  {loading ? "Signing in ..." : "Sign In"}
+                  {/* {loading ? "Signing in ..." : "Sign In"} */}
+                  Sign In
                 </Button>
               <p className="text-center text-sm text-gray-600">Don&apos;t have an Account?{" "} <Link href="/pages/sign-up" className="font-medium text-primary hover:underline">Sign Up</Link></p>
              </CardFooter>
