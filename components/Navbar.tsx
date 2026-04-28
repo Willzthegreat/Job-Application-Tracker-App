@@ -1,18 +1,20 @@
+"use client"
+
 import { Briefcase } from "lucide-react"
 import Link from "next/link"
 import { Button } from "./ui/button"
-// import { getSession, ensureMongoConnection } from "@/lib/auth/auth";
-// import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
-// import { Avatar, AvatarFallback } from "./ui/avatar";
-// import { signOut } from "@/lib/auth/auth";
+import { getSession } from "@/lib/auth/auth";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuGroup } from "./ui/dropdown-menu";
+import { Avatar, AvatarFallback } from "./ui/avatar";
+import SignOutButton from "@/components/sign-out-btn";
+import { useSession } from "@/lib/auth/auth-client"
 
 
 
-
-export default async function Navbar () {
-  // await ensureMongoConnection();
+export default function Navbar () {
   // const session = await getSession();
 
+  const {data: session } = useSession()
 
 
   return (
@@ -24,12 +26,12 @@ export default async function Navbar () {
             Job Tracker
           </Link>
           <div className="flex items-center gap-4">
-            {/* {session?.user ? (
+            {session?.user ? (
               <>
                 <Link href="/pages/dashboard">
                   <Button
                     variant="ghost"
-                    className="text-gray-700 hover:text-black">
+                    className="text-gray-700 cursor-pointer hover:text-black">
                     Dashboard
                   </Button>
                 </Link>
@@ -44,13 +46,15 @@ export default async function Navbar () {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
-                    <div className="px-1.5 py-1 text-xs font-medium text-muted-foreground">
-                        <p>{session.user.name}</p>
-                        <p>{session.user.email}</p>
-                    </div>
-                    <DropdownMenuItem onClick={await signOut() } className="mt-4 cursor-pointer">
-                      Log Out
-                    </DropdownMenuItem>
+                    <DropdownMenuGroup>
+                      <DropdownMenuLabel>
+                        <div className="px-1.5 py-1 text-xs font-medium text-muted-foreground">
+                          <p>{session.user.name}</p>
+                          <p>{session.user.email}</p>
+                        </div>
+                        <SignOutButton />
+                      </DropdownMenuLabel>
+                    </DropdownMenuGroup>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </>
@@ -65,19 +69,7 @@ export default async function Navbar () {
                   Start for free
                 </Button>
               </Link>
-            </>)} */}
-            
-              <Link href="/pages/sign-in">
-                <Button variant='ghost' className="text-gray-700 hover:cursor-pointer hover:text-black">
-                  Log In
-                </Button>
-              </Link>
-              <Link href="/pages/sign-up">
-                <Button  className="bg-primary hover:cursor-pointer hover:bg-primary/90">
-                  Start for free
-                </Button>
-              </Link>
-            
+            </>)}
           </div>
         </div>
       </nav>
