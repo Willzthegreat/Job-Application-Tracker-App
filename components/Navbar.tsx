@@ -3,8 +3,7 @@
 import { Briefcase } from "lucide-react"
 import Link from "next/link"
 import { Button } from "./ui/button"
-import { getSession } from "@/lib/auth/auth";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuGroup } from "./ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuGroup } from "./ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import SignOutButton from "@/components/sign-out-btn";
 import { useSession } from "@/lib/auth/auth-client"
@@ -12,7 +11,6 @@ import { useSession } from "@/lib/auth/auth-client"
 
 
 export default function Navbar () {
-  // const session = await getSession();
 
   const {data: session } = useSession()
 

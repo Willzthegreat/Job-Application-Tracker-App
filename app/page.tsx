@@ -4,10 +4,6 @@ import Link from "next/link";
 import ImageTabs from "@/components/imageTabs";
 
 
-
-
-
-
 export default function Home() {
   
 
