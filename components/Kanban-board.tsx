@@ -1,9 +1,14 @@
 "use client"
 
-import { Board, Column } from "@/lib/models/models.types";
-import { Calendar, CheckCircle2, Mic, Award, XCircle } from "lucide-react";
+import { Board, Column, JobApplication } from "@/lib/models/models.types";
+import { Calendar, CheckCircle2, Mic, Award, XCircle, MoreVertical, Trash2 } from "lucide-react";
 import React from "react";
-import { Card, CardContent, CardHeader } from "./ui/card";
+import { Card, CardContent, CardHeader, CardTitle  } from "./ui/card";
+import { Button } from "./ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import CreateJobApplicationDialog from "./ui/create-job-dialog";
+import JobApplicationCard from "./job-application-card";
+import { useBoard } from "@/lib/hooks/useBoards";
 
 
 interface KanbanBoardProps{
@@ -38,29 +43,77 @@ const COLUMN_CONFIG: Array<ColConfig> = [
   },
 ];
 
-function DroppableColumn({column, config, boardId}: {
+function DroppableColumn({
+  column, 
+  config, 
+  boardId, 
+  sortedColumns
+}: {
   column: Column; 
   config: ColConfig;
   boardId: string;
+  sortedColumns: Column[]; 
 }) {
+  const sortedJobs = column.jobApplications?.sort((a, b) => a.order - b.order) || [];
+    
   return (
     <>
-      <Card data-board-id={boardId}>
-        <CardHeader className={`${config.color} text-white flex items-center gap-2`}>
-        {config.icon}
-        <span className="font-semibold">{column.name}</span>
+      <Card 
+      className="min-w-75 shrink-0 shadow-md p-0"
+      >
+        <CardHeader 
+        className={`${config.color} text-white rounded-t-lg pb-3 pt-3 `} >
+          <div className="flex items-center justify-between" >
+            <div className="flex items-center gap-2" >
+              {config.icon}
+              <CardTitle className="font-semibold text-base">{column.name}</CardTitle>
+            </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="h-6 w-6 hover:cursor-pointer hover:bg-white/20 text-white" >
+                  <MoreVertical className="w-4 h-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end"> 
+                {/* TODO: render jobs */}
+                <DropdownMenuItem className=" text-destructive">
+                  <Trash2 className="w-4 h-4 mr-2" />
+                  Delete Column
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </CardHeader>
-        <CardContent>
-        {/* TODO: render jobs */}
+        <CardContent className="pt-4 space-y-2 bg-gray-50/50 min-h-100 rounded-b-lg" >
+          {sortedJobs.map((job, key) => (
+            <SortableJobCard key={key} 
+            job={{ ...job, columnId: job.columnId || column._id }} 
+            columns={sortedColumns} 
+            />
+          ))}
+          <CreateJobApplicationDialog boardId={boardId} columnId={column._id} />
         </CardContent>
       </Card>
     </>
   );
 }
 
+function SortableJobCard({job, columns}: {job: JobApplication; columns: Column []  }) {
+  return (
+    <>
+      <div>
+        <JobApplicationCard
+         job={job} columns={columns} 
+         />
+      </div> 
+    </>
+  )
+}
+
 export default function KanbanBoard({board, userId}: KanbanBoardProps) {
-    const columns = board.columns;
+    const { columns, moveJob } = useBoard(board);
   
+    const sortedColumns = columns?.sort((a, b) => a.order - b.order) || [];
   return (
       <>
         <div>
@@ -71,7 +124,12 @@ export default function KanbanBoard({board, userId}: KanbanBoardProps) {
                 icon: <Calendar className="w-4 h-4 text-white" />,
               };
               return (
-                <DroppableColumn key={key} column={col} config={config} boardId={board._id} />
+                <DroppableColumn 
+                key={key} 
+                column={col} 
+                config={config} 
+                boardId={board._id} 
+                sortedColumns={sortedColumns} />
               );
             })
             }

@@ -13,7 +13,7 @@ export default function Home() {
         {/*Hero Section */}
         <section className="container mx-auto px-4 py-32">
           <div className="mx-auto max-w-4xl text-center">
-            <h1 className="text-black mb-6 text-6xl font-bold ">
+            <h1 className="text-black mb-6 text-3xl md:text-4xl lg:text-6xl font-bold ">
               A better way to track your job applications.
             </h1>
             <p className="text-muted-foreground mb-10 text-xl">

@@ -4,7 +4,7 @@ import { Board, Column } from "./models";
 
 
 const DEFAULT_COLUMNS = [
-    {name: "Wish Lish", order: 0,},
+    {name: "Wish List", order: 0,},
     {name: "Applied", order: 1},
     {name: "Interviewing", order: 2},
     {name: "Offer", order: 3},
@@ -14,7 +14,7 @@ const DEFAULT_COLUMNS = [
 
 
 
-export async function initalizeUserBoard(userId: string) {
+export async function initializeUserBoard(userId: string) {
     try {
         await connectDB()
 
@@ -40,14 +40,14 @@ export async function initalizeUserBoard(userId: string) {
             name: col.name,
             order: col.order,
             boardId: board._id,
-            jobApplication: [],
+            jobApplications: [],
         })
       )
     );
 
     // Update the board with the new column IDs
 
-    board.colums = columns.map((col) => col._id);
+    board.columns = columns.map((col) => col._id);
     await board.save();
     
     return board;

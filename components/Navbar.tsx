@@ -34,7 +34,7 @@ export default function Navbar () {
                   </Button>
                 </Link>
                 <DropdownMenu>
-                  <DropdownMenuTrigger>
+                  {/* <DropdownMenuTrigger>
                     <Button variant="ghost" className="cursor-pointer">
                       <Avatar>
                         <AvatarFallback className="bg-primary  text-white font-bold">
@@ -42,6 +42,15 @@ export default function Navbar () {
                         </AvatarFallback>  
                       </Avatar>
                     </Button>
+                  </DropdownMenuTrigger> */}
+                  <DropdownMenuTrigger
+                    render={<Button variant="ghost" className="cursor-pointer" />}
+                  >
+                    <Avatar>
+                      <AvatarFallback className="bg-primary  text-white font-bold">
+                        {session.user.name[0].toUpperCase() ||'?'}
+                      </AvatarFallback>
+                    </Avatar>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
                     <DropdownMenuGroup>
