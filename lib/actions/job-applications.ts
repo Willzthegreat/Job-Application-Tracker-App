@@ -89,7 +89,7 @@ export async function createJobApplication(data: JobApplicationData) {
     },
   });
 
-  revalidatePath("/dashboard");
+  revalidatePath("/pages/dashboard");
   
     return { data: JSON.parse(JSON.stringify(jobApplication)) };
 }
@@ -220,11 +220,39 @@ export async function updateJobApplication(
     updatesToApply.order = newOrderValue;
   }
 
-  const updated = await JobApplication.findByIdAndUpdate(id, updatesToApply, { 
+  const updated = await JobApplication.findByIdAndUpdate(id, updatesToApply, {
     new: true 
   });
 
-  revalidatePath("/dashboard");
+  revalidatePath("/pages/dashboard");
   
   return { data:  JSON.parse(JSON.stringify(updated))};
+}
+
+export async function deleteJobApplication(id: string) {
+  const session = await getSession();
+
+  if (!session?.user) {
+    return { error: "Unauthorized" };
+  }
+
+  const jobApplication = await JobApplication.findById(id);
+
+  if (!jobApplication) {
+    return { error: "Job application not found" };
+  }
+
+  if (jobApplication.userId !== session.user.id) {
+    return { error: "Unauthorized" };
+  }
+
+  await Column.findByIdAndUpdate(jobApplication.columnId, {
+    $pull: { jobApplications: id },
+  });
+
+  await JobApplication.deleteOne({ _id: id });
+
+  revalidatePath("/pages/dashBoard"); 
+
+  return { success: true };
 }

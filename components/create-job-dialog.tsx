@@ -2,11 +2,11 @@
 
 
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./dialog";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { Plus } from "lucide-react";
-import { Label } from "./label";
-import { Input } from "./input";
-import { Textarea } from "./textarea";
+import { Label } from "./ui/label";
+import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
 import { useState } from "react";
 import { createJobApplication } from "@/lib/actions/job-applications";
 
@@ -49,7 +49,8 @@ export default function CreateJobApplicationDialog({columnId, boardId}:  CreateJ
         ...formData,
         columnId,
         boardId,
-        tags: formData.tags.split(",").map(tag => tag.trim()).filter(tag => tag.length > 0),
+        tags: formData.tags.split(",").map(tag => tag.trim()).filter(tag => tag.length > 0)
+        .join(", "),
       });
 
       if (!result.error) {
