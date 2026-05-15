@@ -182,13 +182,13 @@ export default function JobApplicationCard({
                         <div className="grid grid-cols-2 gap-4">
                           <div className="space-y-2">
                             <Label htmlFor="location"> Location </Label>
-                            <Input className="pt-2" name="location" id="location" 
+                            <Input className="pt-2" name="location" id="location"
                             value={formData.location}
                             placeholder="your Location" onChange={(e) => setFormData({...formData, location: e.target.value})} />
                           </div>
                           <div className="space-y-2">
                             <Label htmlFor="salary"> Salary </Label>
-                            <Input className="pt-2" name="salary" id="salary" 
+                            <Input className="pt-2" name="salary" id="salary"
                             value={formData.salary}
                             placeholder="e.g. N200,000 - N300,000" onChange={(e) => setFormData({...formData, salary: e.target.value})}  />
                           </div>
@@ -196,7 +196,7 @@ export default function JobApplicationCard({
                         <div className="pt-4">
                           <div className="space-y-2">
                             <Label htmlFor="jobUrl"> Job URL </Label>
-                              <Input className="pt-2" name="jobUrl" id="jobUrl" 
+                              <Input className="pt-2" name="jobUrl" id="jobUrl"
                               value={formData.jobUrl}
                               placeholder="e.g. https://....." onChange={(e) => setFormData({...formData, jobUrl: e.target.value})} />
                           </div>
