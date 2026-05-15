@@ -16,12 +16,14 @@ import { useState } from "react";
 interface JobApplicationCardProps {
     job: JobApplication;
     columns: Column[];
+    dragHandleProps?: React.HTMLAttributes<HTMLElement>;
 }
 
 
 export default function JobApplicationCard({ 
   job, 
-  columns 
+  columns,
+  dragHandleProps,
 }: JobApplicationCardProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
@@ -59,6 +61,7 @@ export default function JobApplicationCard({
   async function handleDelete() {
     try{
       const result = await deleteJobApplication(job._id,);
+
     } catch (err) {
       console.error("Failed to move job application", err);
     }
@@ -76,7 +79,7 @@ export default function JobApplicationCard({
 
     return (
       <>
-        <Card className="cursor-pointer transition-shadow hover:shadow-md">
+        <Card className="cursor-pointer transition-shadow hover:shadow-md" {...dragHandleProps}>
           <CardContent className="p-4">
             <div className="flex justify-between items-start gap-2">
               <div className="flex-1 min-w-0">
@@ -144,7 +147,7 @@ export default function JobApplicationCard({
 
                     <DropdownMenuItem 
                     className="text-destructive hover:text-destructive hover:cursor-pointer"
-                    onClick={() => handleDelete}
+                    onClick={() => handleDelete()}
                     >
                       <Trash2 className="w-4 h-4 mr-1" />
                       Delete
@@ -170,7 +173,7 @@ export default function JobApplicationCard({
                         <div className="grid grid-cols-2 gap-4 mb-4">
                           <div className="space-y-2">
                             <Label htmlFor="company"> Company * </Label>
-                            <Input className="pt-2" name="company" id="company" placeholder="Enter Company Name" required onChange={(e) => setFormData({...formData, company: e.target.value})} />
+                            <Input className="pt-2" value={formData.company} name="company" id="company" placeholder="Enter Company Name" required onChange={(e) => setFormData({...formData, company: e.target.value})} />
                           </div>
                           <div className="space-y-2">
                             <Label htmlFor="position"> Position * </Label>
