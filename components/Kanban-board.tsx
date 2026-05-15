@@ -89,7 +89,7 @@ function DroppableColumn({
               <CardTitle className="font-semibold text-base">{column.name}</CardTitle>
             </div>
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
+              <DropdownMenuTrigger>
                 <Button variant="ghost" size="icon" className="h-6 w-6 hover:cursor-pointer hover:bg-white/20 text-white" >
                   <MoreVertical className="w-4 h-4" />
                 </Button>
