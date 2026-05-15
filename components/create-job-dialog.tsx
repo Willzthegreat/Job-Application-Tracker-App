@@ -67,7 +67,7 @@ export default function CreateJobApplicationDialog({columnId, boardId}:  CreateJ
     return (
         <>
        <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger asChild>
+          <DialogTrigger>
             <Button variant="outline" className=" hover:cursor-pointer w-full mb-4 justify-start text-muted-foreground border-dashed border-2 " >
                 <Plus />
               Add Job
